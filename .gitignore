@@ -1,0 +1,10 @@
+# Ignore environment files
+.env
+
+# Ignore database files
+loginDB.js
+booksDB.js
+base.js
+
+# Ignore node_modules
+node_modules/

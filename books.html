@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Books</title>
+    <link rel="stylesheet" href="/static/books.css">
+</head>
+
+<body>
+    <div class="navbar">
+        <nav>
+            <a href="update.html" target="_blank">Update</a>
+        </nav>
+    </div>
+    <table id="btable">
+        <thead>
+            <tr>
+                <th>Book ID</th>
+                <th>Book Name</th>
+                <th>Author</th>
+                <th>Publisher</th>
+                <th>Genre</th>
+                <th>Availability</th>
+                <th>Total Copies</th>
+            </tr>
+        </thead>
+        <tbody id="booksBody">
+
+        </tbody>
+    </table>
+    <script src="base.js"></script>
+
+</body>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        fetch("/books")
+            .then(response => response.json())
+            .then(data => {
+                let tbbody = document.getElementById("booksBody")
+                tbbody.innerHTML = ""
+
+                if (data.books.length === 0) {
+                    document.getElementById("btable").style.display = "none"
+
+                    let message = document.createElement("p")
+                    message.textContent = "No books available"
+                    message.style.textAlign = "center"
+                    message.style.fontSize = "35px"
+                    message.style.margin = "340px"
+                    document.body.appendChild(message)
+                    return
+                }
+
+                data.books.forEach(book => {
+                    const row = `<tr>
+                                    <td>${book.bid}</td>
+                                    <td>${book.name}</td>
+                                    <td>${book.author}</td>
+                                    <td>${book.publisher}</td>
+                                    <td>${book.genre}</td>
+                                    <td>${book.availability}</td>
+                                    <td>${book.total_copies}</td>
+                                </tr>`
+                    tbbody.innerHTML += row;
+                });
+            })
+            .catch(error => console.error("Error fetching", error));
+
+    })
+</script>
+
+</html>
