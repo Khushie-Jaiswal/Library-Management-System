@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Page</title>
+    <link rel="stylesheet" href="/static/update.css">
+</head>
+
+<body>
+    <form action="/updates" method="post" id="formId">
+        <div class="elem">
+            <label for="bid">Book ID : </label>
+            <input type="text" name="bid" id="bid" style="font-size: 20px;" required>
+        </div>
+        <div class="elem">
+            <label for="name">Name : </label>
+            <input type="text" name="name" id="name" style="font-size: 20px;">
+        </div>
+        <div class="elem">
+            <label for="author">Author : </label>
+            <input type="text" name="author" id="author" style="font-size: 20px;">
+        </div>
+        <div class="elem">
+            <label for="publisher">Publisher : </label>
+            <input type="text" name="publisher" id="publisher" style="font-size: 20px;">
+        </div>
+        <div class="elem">
+            <label for="genre">Genre : </label>
+            <input type="text" name="genre" id="genre" style="font-size: 20px;">
+        </div>
+        <div class="elem">
+            <label for="availability">Availability : </label>
+            <input type="text" name="availability" id="availability" style="font-size: 20px;">
+        </div>
+        <div class="elem">
+            <label for="total_copies">Total Copies : </label>
+            <input type="text" name="total_copies" id="total_copies" style="font-size: 20px;">
+        </div>
+    </form>
+    <div class="buttons">
+        <button class="ups" id="addBtn">ADD</button>
+        <button class="ups" id="editBtn">EDIT</button>
+        <button class="ups" id="deleteBtn">DELETE</button>
+    </div>
+
+</body>
+<script>
+    document.getElementById("addBtn").addEventListener("click", () => handleFormAction("add"))
+    document.getElementById("editBtn").addEventListener("click", () => handleFormAction("edit"))
+    document.getElementById("deleteBtn").addEventListener("click", () => handleFormAction("delete"))
+
+    async function handleFormAction(action) {
+        const form = document.getElementById("formId");
+        if (!form.checkValidity()) {
+            form.reportValidity();
+            return;
+        }
+        const bid = document.getElementById("bid").value;
+
+        const checkResponse = await fetch(`/bid?bid=${bid}`)
+        const checkResult = await checkResponse.json()
+
+        if (action === "add" && checkResult.exists) {
+            alert("Book ID already exists. Please enter a unique ID")
+            form.reset();
+            return;
+        }
+        if (!checkResult.exists && (action === "edit" || action === "delete")) {
+            alert("Book not found")
+            form.reset();
+            return;
+        }
+
+
+        const name = document.getElementById("name").value;
+        const author = document.getElementById("author").value;
+        const publisher = document.getElementById("publisher").value;
+        const genre = document.getElementById("genre").value;
+        const availability = document.getElementById("availability").value;
+        const total_copies = document.getElementById("total_copies").value;
+
+        const response = await fetch(`/${action}Btn`, {
+            method: action === "delete" ? "DELETE" : "POST",
+            headers: { "Content-type": "application/json" },
+            body: JSON.stringify({ bid, name, author, publisher, genre, availability, total_copies })
+        })
+
+        const result = await response.text()
+
+        if (bid) {
+            if (action === "add") alert("Book added successfully")
+            if (action === "edit") alert("Book edited successfully")
+            if (action === "delete") alert("Book deleted successfully")
+            form.reset();
+        }
+
+    }
+</script>
+
+</html>

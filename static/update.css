@@ -1,0 +1,52 @@
+body {
+    background-image: url("login.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+form {
+    font-size: 30px;
+    padding: 40px 80px;
+    border: 2px solid white;
+    border-radius: 10px;
+    margin-left: 400px;
+    margin-right: 400px;
+    margin-top: 50px;
+}
+
+.elem {
+    margin-right: 0px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    font-weight: bold;
+    color: white;
+}
+
+.buttons {
+    margin-top: 70px;
+    display: flex;
+    justify-content: center;
+}
+
+button {
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bold;
+    padding: 5px 20px;
+    border-radius: 10px;
+    width: 120px
+}
+
+button:hover {
+    background-color: black;
+    color: white;
+}
+
+.ups {
+    font-size: 25px;
+    width: 170px;
+    padding: 10px 0px;
+    margin: 0px 40px;
+    cursor: pointer;
+}
