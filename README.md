@@ -1,5 +1,5 @@
 **Hello Developers!**
-Library Management System is a simple project which I built to improve my understanding about MongoDB and backend connections along with the use of password authentication to enhance security. After entering the password, this project allows the librarian to add, edit and delete the details of various books (CRUD operations) in the library's database. Here are some tips to setup this project in your systems.
+Library Management System is a simple project which I built to improve my understanding about MongoDB and backend connections along with the use of password authentication to enhance security using bcrypt library. After entering the password, this project allows the librarian to add, edit and delete the details of various books (CRUD operations) in the library's database. Here are some tips to setup this project in your systems.
 
 # Setup instructions
 
