@@ -15,10 +15,10 @@ const router = express.Router();
 const db1 = require("./loginDB")
 const db2 = require("./booksDB")
 
-app.use('/static', express.static('static'))
-app.use(express.static(__dirname))
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use('/static', express.static('static'))
+app.use(express.static(__dirname))
 app.use(router);
 
 router.get("/bid", async (req, res) => {
