@@ -4,7 +4,7 @@
     { "src": "base.js", "use": "@vercel/node" }
   ],
   "routes": [
-    { "src": "/.", "dest": "base.js" }
+    { "src": "./", "dest": "base.js" }
   ],
   "outputDirectory": "."
 }
